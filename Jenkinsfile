@@ -48,7 +48,7 @@ pipeline {
                           "files": [
                             {
                               "pattern": "jarstaging/(*)",
-                              "target": "sai-libs-release-local/{1}",
+                              "target": "maven-libs-release-local/{1}",
                               "flat": "false",
                               "props": "${properties}",
                               "exclusions": [ "*.sha1", "*.md5"]
