@@ -28,11 +28,11 @@ pipeline {
 
         stage('SonarQube analysis') {
             environment {
-                scannerHome = tool 'subbu-sonarqube-scanner'
+                scannerHome = tool 'vajram-sonarqube-scanner'
             }
 
             steps {
-                withSonarQubeEnv('subba-sonarqube-server') {
+                withSonarQubeEnv('vajram-sonarqube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
