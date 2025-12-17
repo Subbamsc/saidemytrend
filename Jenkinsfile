@@ -1,6 +1,3 @@
-// Define the URL of the Artifactory registry
-def registry = 'https://trialwltbdb.jfrog.io/'
-
 pipeline {
     agent any
 
@@ -10,27 +7,26 @@ pipeline {
 
     stages {
 
-        stage("build") {
+        stage("Build") {
             steps {
-                echo "----------- build started ----------"
+                echo "----------- Build Started ----------"
                 sh 'mvn clean deploy -Dmaven.test.skip=true'
-                echo "----------- build completed ----------"
+                echo "----------- Build Completed ----------"
             }
         }
 
-        stage("test") {
+        stage("Test") {
             steps {
-                echo "----------- unit test started ----------"
+                echo "----------- Unit Test Started ----------"
                 sh 'mvn surefire-report:report'
-                echo "----------- unit test completed ----------"
+                echo "----------- Unit Test Completed ----------"
             }
         }
 
-        stage('SonarQube analysis') {
+        stage("SonarQube Analysis") {
             environment {
                 scannerHome = tool 'vajram-sonarqube-scanner'
             }
-
             steps {
                 withSonarQubeEnv('vajram-sonarqube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
@@ -38,5 +34,5 @@ pipeline {
             }
         }
 
-  
-
+    }
+}
